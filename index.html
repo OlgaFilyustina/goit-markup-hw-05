@@ -32,8 +32,7 @@
                         <svg class="header-icon" width="16px" height="12px">
                             <use href="./images/sprite.svg#icon-envelope"> </use>
                         </svg>
-                        mailto:info@devstudio.com
-                    </a>
+                        info@devstudio.com</a>
                 </li>
                 <li class="item"> 
                     <a class="connect-headers link" href="tel:+380961111111">
@@ -50,7 +49,16 @@
         <section class="section-hero">
             <div class="conteiner">
                 <h1 class="hero-title"> ЭФФЕКТИВНЫЕ РЕШЕНИЯ ДЛЯ ВАШЕГО БИЗНЕСА </h1>
-                <button class="hero-button" type="button"> Заказать услугу </button>
+                <button class="hero-button" type="button" data-modal-open > Заказать услугу </button>
+                <!-- БЕКДРОП________________________________________________________________________ -->
+                <div class="backdrop is-hidden" data-modal>
+                    <div class="modal">
+                            <svg data-modal-close class="close-icon" width="11px" height="11px">
+                                <use href="./images/sprite.svg#icon-Vector-1-1"> </use>
+                                </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <section class="section">
@@ -100,9 +108,24 @@
             <div class="conteiner"> 
                 <h2 class="works-title"> Чем мы занимаемся </h2>
                 <ul class="photo-gallery list">
-                    <li class="item"> <img src="./images/box1.jpg" alt="Программист работает" width="370" /> </li>
-                    <li class="item"> <img src="./images/box2.jpg" alt="Программист разрабатывает мобильное приложение" width="370" /></li>
-                    <li class="item"> <img src="./images/box3.jpg" alt="Дизайнер работает над проектом" width="370" /></li>
+                    <li class="item"> 
+                        <img src="./images/box1.jpg" alt="Программист работает" width="370" />
+                        <div class="services"> 
+                            <h3 class="services-title"> ДЕСКТОПНЫЕ ПРИЛОЖЕНИЯ </h3> 
+                        </div> 
+                    </li>
+                    <li class="item">
+                        <img src="./images/box2.jpg" alt="Программист разрабатывает мобильное приложение" width="370" />
+                        <div class="services">
+                            <h3 class="services-title"> МОБИЛЬНЫЕ ПРИЛОЖЕНИЯ </h3>
+                        </div>
+                        </li>
+                    <li class="item"> 
+                        <img src="./images/box3.jpg" alt="Дизайнер работает над проектом" width="370" />
+                        <div class="services">
+                            <h3 class="services-title"> ДИЗАЙНЕРСКИЕ РЕШЕНИЯ </h3>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </section>
@@ -268,42 +291,42 @@
                     <ul class="clients-list list">
                         <li class="client-item">
                             <a class="company-link link" href="">
-                                <svg class="company-icon" width="41px" height="47px">
+                                <svg class="company-icon" width="106px" height="60px">
                                     <use href="./images/sprite.svg#icon-group0"> </use>
                                 </svg>
                             </a>
                         </li>
                         <li class="client-item">
                             <a class="company-link link" href="">
-                                <svg class="company-icon" width="40px" height="50px">
+                                <svg class="company-icon" width="106px" height="60px">
                                     <use href="./images/sprite.svg#icon-group1"> </use>
                                 </svg>
                             </a>
                         </li>
                         <li class="client-item">
                             <a class="company-link link" href="">
-                                <svg class="company-icon" width="43px" height="41px">
+                                <svg class="company-icon" width="106px" height="60px">
                                     <use href="./images/sprite.svg#icon-group2"> </use>
                                 </svg>
                             </a>
                         </li>
                         <li class="client-item">
                             <a class="company-link link" href="">
-                                <svg class="company-icon" width="84px" height="41px">
+                                <svg class="company-icon" width="106px" height="60px">
                                     <use href="./images/sprite.svg#icon-group3"> </use>
                                 </svg>
                             </a>
                         </li>
                         <li class="client-item">
                             <a class="company-link link" href="">
-                                <svg class="company-icon" width="63px" height="46px">
+                                <svg class="company-icon" width="106px" height="60px">
                                     <use href="./images/sprite.svg#icon-group4"> </use>
                                 </svg>
                             </a>
                         </li>
                         <li class="client-item">
                             <a class="company-link link" href="" >
-                                <svg class="company-icon" width="94px" height="44px">
+                                <svg class="company-icon" width="106px" height="60px">
                                     <use href="./images/sprite.svg#icon-group5"> </use>
                                 </svg>
                             </a>
@@ -323,7 +346,7 @@
                         <li class="footers-item"> <a class="contact-footers link" href="https://goo.gl/maps/4YwQ2GXSQia75gbW7">
                                 г. Киев пр-т Леси Украинки, 26</a>
                         <li class="footers-item"> <a class="connect-footers link"
-                                href=" mailto:info@devstudio.com">mailto:info@devstudio.com</a></li>
+                                href=" mailto:info@devstudio.com">info@devstudio.com</a></li>
                         <li class="footers-item"> <a class="connect-footers link" href="tel:+380961111111">+38 096 111 11 11</a>
                         </li>
                     </ul>
@@ -364,6 +387,7 @@
             </div>
         </div> 
     </footer>
+    <script src="./js/modal.js"></script>
 </body>
 
 </html>

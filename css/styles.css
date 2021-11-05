@@ -15,6 +15,7 @@
   --color-box: #eeeeee;
   --color-border-header: #ececec;
   --color-team-section: #f5f4fa;
+  --timing-futction: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -65,6 +66,7 @@ img {
   border: 0;
   clip: rect(0 0 0 0);
 }
+
 /* ul и li это идеальное место для использования display-flex */
 /* для карточек использовать формулу flex-basis(есть в тетрадке (2:00) */
 /* карточки(а конкретнее текст карточек) можно обьеденить в div и раздать им падинги в верх и в низ и т д (2:07) */
@@ -122,6 +124,7 @@ img {
   margin-right: 50px;
 }
 .contact-headers {
+  position: relative;
   display: block; /* в этом блоке нужно применить padding поэтому и ставим display block*/
   font-weight: 500;
   font-size: 14px;
@@ -130,11 +133,29 @@ img {
   color: var(--title-text-color);
   padding-top: 32px;
   padding-bottom: 32px;
+
+  transition: color 100ms var(--timing-futction);
+}
+.current::after {
+  content: '';
+
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 78px;
+  height: 4px;
+  background: #2196f3;
+  border-radius: 2px;
+
+  transition: opacity 100ms var(--timing-futction);
 }
 .header-connect {
   display: flex;
   margin-left: auto;
   align-items: center;
+
+  transition: color 100ms var(--timing-futction),
+    fill 100ms var(--timing-futction);
 }
 .header-connect .item + .item {
   margin-left: 50px;
@@ -148,13 +169,13 @@ img {
   line-height: 1.14;
   letter-spacing: 0.02em;
   color: var(--connect-text-color);
-}
 
+  transition: color 100ms var(--timing-futction);
+}
 .connect-headers:hover,
 .connect-headers:focus {
   color: var(--contact-text-color);
 }
-
 .header-icon {
   fill: currentColor;
   margin-right: 10px;
@@ -171,14 +192,49 @@ img {
 .contact-headers:hover {
   color: var(--contact-text-color);
 }
-/* .connect-headers:focus,
-.connect-headers:hover {
-  color: var(--contact-text-color);
-} */
+/*  БЕКДРОП__________________________________________________*/
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  /* visibility: ;  */
+}
+/* Модальное окно
+ в селекторе которого используются свойства visibility, opacity и pointer-events.
+«D7» Если убрать с бекдропа класс is-hidden - появляется бекдроп и модальное окно.*/
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  min-height: 581px;
+  min-width: 528px;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.close-icon {
+  position: absolute;
+  padding: 6px;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
 /* ГЕРОЙ -------------------------------------------------*/
 .section-hero {
-  /* ограничить секциу до 1600 px чтобы правильно постав фоновую картинку 32минута в Данилка*/
-  /* фон для героя(его размеры) представлены на 37 минуте Данилкаы */
   /* наложение градиента на фон 54я минута Данилка  */
   text-align: center;
   padding-top: 200px;
@@ -192,7 +248,7 @@ img {
     url(../images/hero.jpg);
   background-repeat: no-repeat;
   background-position: center;
-  /* background-size: cover; */
+  background-size: cover;
 }
 .hero-title {
   margin: 0 auto 30px;
@@ -248,14 +304,9 @@ img {
   margin-right: -30px;
 }
 .benefits .item-benefits {
-  /* flex-basis: calc(100 / 4); */
   margin-right: 30px;
   margin-bottom: 94px;
 }
-/* .benefits .item {
-  flex-basis: calc(100% / 4);
-  margin-right: 30px;
-} */
 .benefits .item:last-child {
   margin-right: 0;
 }
@@ -276,17 +327,20 @@ img {
   width: 270px;
   height: 120px;
   background-color: #f5f4fa;
-  padding: 25px 100px;
+  padding: 25px;
   margin-bottom: 30px;
   border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  transition: border 100ms var(--timing-futction);
 }
 .box-icon:hover,
 .box-icon:focus {
+  cursor: pointer;
   border: 1px solid #000000;
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
 /* ЧЕМ МЫ ЗАНИМАЕМСЯ -------------------------------------- */
 .photo-gallery {
   display: flex;
@@ -303,7 +357,28 @@ img {
   color: var(--title-text-color);
   margin-bottom: 50px;
 }
-/* Заголовки и параграфы ----------------------------------*/
+.item {
+  position: relative;
+}
+.services {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 370px;
+  height: 70px;
+  background: rgba(47, 48, 58, 0.8);
+}
+.services-title {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding: 27px 0;
+}
+/* Наша команда ----------------------------------*/
 .works-section {
   padding: 0 0 94px 0;
 }
@@ -368,6 +443,8 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: background-color 100ms var(--timing-futction);
 }
 .social-link:hover,
 .social-link:focus {
@@ -397,14 +474,10 @@ img {
   margin-bottom: 50px;
 }
 .clients-list {
-  flex-basis: calc(100% / 6 - 36px);
   display: flex;
 }
-/* .client-item {
-  content: '';
-  cursor: pointer;
-} */
 .client-item + .client-item {
+  flex-basis: calc(100% / 6 - 36px);
   margin-left: 30px;
 }
 .company-link {
@@ -416,43 +489,19 @@ img {
   justify-content: center;
   color: #afb1b8;
   border: 1px solid #afb1b8;
-  cursor: pointer;
+
+  transition: color 100ms var(--timing-futction),
+    border-color 100ms var(--timing-futction);
 }
 .company-icon {
   fill: currentColor;
 }
-/* ------------------------ */
-/* .company-link {
-  width: 170px;
-  height: 92px;
-  border: 1px solid var(--contact-text-color);
-  border-radius: 4px;
-} */
-/* .company-link:hover,
-.company-link:focus {
-  border-color: var(--contact-text-color);
-}
-.company-link:hover .company-icon,
-.company-link:focus .company-icon {
-  fill: var(--contact-text-color);
-} */
-/* Смотрите при ховере и фокусе на ссылку меняем цвет бордера и иконку
-   чтобы все менялось только на ссылке, задайте для иконки currentColor, 
-   и на ссылке задайте колор, а при ховере и фокусе анимируйте все на ссылке */
 .company-link:hover,
 .company-link:focus {
   color: var(--contact-text-color);
   border-color: var(--contact-text-color);
 }
-
 /* ПОРТФОЛИО --------------------------------------------- */
-.button-item:focus,
-.button-item:hover {
-  color: var(--button-text-color);
-  background-color: var(--button-background-color);
-  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
-    0px 2px 2px rgba(0, 0, 0, 0.12);
-}
 .button-item {
   cursor: pointer;
   padding: 6px 22px;
@@ -463,6 +512,16 @@ img {
   letter-spacing: 0.03em;
   border-radius: 4px;
   border: none;
+
+  transition: color 100ms var(--timing-futction),
+    background-color 100ms var(--timing-futction);
+}
+.button-item:focus,
+.button-item:hover {
+  color: var(--button-text-color);
+  background-color: var(--button-background-color);
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
+    0px 2px 2px rgba(0, 0, 0, 0.12);
 }
 .button-list {
   justify-content: center;
@@ -472,6 +531,10 @@ img {
 .btn-portfolio:not(:last-child) {
   margin-right: 8px;
 }
+/* ОВЕРЛЕЙ---------------------------------------------- */
+/* =================================================================== */
+/* ПОРТФОЛИО --------------------------------------------- */
+
 .project-list {
   display: flex;
   flex-wrap: wrap;
@@ -482,14 +545,44 @@ img {
   flex-basis: calc(100% / 3 - 30px);
   margin-left: 30px;
   margin-top: 30px;
-}
-.item-portf:hover,
-.item-portf:focus {
+  transition: border 100ms var(--timing-futction);
   border: 1px solid #eeeeee;
-  box-sizing: border-box;
+}
+.project-link {
+  display: block;
+}
+/* .project-link :hover,
+.project-link :focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
+} */
+.hover-overlay {
+  overflow: hidden;
 }
+.overlay {
+  position: relative;
+}
+.overlay::before {
+  display: inline-block;
+  content: '';
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(33, 150, 243, 0.9);
+
+  transform: translateY(100%);
+}
+.overley:hover::after {
+  opacity: 1;
+}
+.item-portf :hover .overlay::before {
+  transform: translateY(0%);
+  transition: transform 300ms var(--timing-futction);
+}
+
 .project-title {
   font-weight: 700;
   font-size: 18px;
@@ -497,25 +590,25 @@ img {
   letter-spacing: 0.06em;
   color: var(--title-text-color);
 }
+.box-portfolio {
+  /* border: 1px solid #eeeeee; */
+  padding: 20px 24px;
+}
 .project-description {
   font-size: 16px;
   line-height: 1.87;
   letter-spacing: 0.03em;
   color: var(--description-text-color);
 }
-.box-portfolio {
-  border: 1px solid #eeeeee;
-  padding: 20px 24px;
-}
 /* FOOTER------------------------------------------------ */
-/* иконки (для присоеденяйтесь) репета 1 вебинар 1:38 */
-/* иконки Данилко 4е занятие  1:38  */
 .contact-footers {
   font-style: normal;
   font-size: 14px;
   line-height: 1.14;
   letter-spacing: 0.03em;
   color: var(--color-contact-footers);
+
+  transition: color 100ms var(--timing-futction);
 }
 .footers-item:not(:last-child) {
   margin-bottom: 10px;
@@ -526,6 +619,8 @@ img {
   line-height: 1.14;
   letter-spacing: 0.02em;
   color: var(--connect-text-color);
+
+  transition: color 100ms var(--timing-futction);
 }
 .footer-contact .current {
   color: var(--button-background-color);
@@ -544,7 +639,7 @@ img {
 }
 .footer-conteiner {
   display: flex;
-  align-items: center;
+  align-items: baseline;
 }
 .join-title {
   font-weight: 700;
@@ -556,23 +651,5 @@ img {
   margin-bottom: 20px;
 }
 .join {
-  margin-top: 70px;
-  margin-bottom: 102px;
   margin-left: 70px;
-  margin-right: 881px;
 }
-/* 
-
-«A2» Все векторные изображения (иконки) собраны в SVG-спрайт icons.svg, который лежит в папке images.
-«B1» Для всех иконок используется векторная графика в формате svg.
-«B2» SVG-иконки экспортированы правильно. При экспорте выбрана «группа», а не сам вектор.
-«B3» Все иконки из SVG-спрайта добавлены в HTML при помощи тегов <svg> и <use>
-«B4» Размеры иконок взяты из макета и заданы элементу <svg> в HTML-файле.
-«B5» В блоке Контактов в шапке, добавлены иконки конверта и телефона.
-«B6» В секции Преимуществ добавлены иконки.
-«B8» В секции Клиентов добавлены иконки компаний.
-«B9» В футере добавлены иконки соцсетей. Оформление
-«C2» Фоновое изображение в блоке под хедером не растягивается шире своего оригинального размера 1600рх.
-«C4» В карточках страницы Портфолио есть эффект тени при ховере в любом месте карточки.
-«C6» При ховере или фокусе, иконки должны переходить в активное состояние - изменять цвет, если это указано в макете.
- */
